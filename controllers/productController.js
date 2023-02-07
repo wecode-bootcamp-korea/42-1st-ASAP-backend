@@ -6,8 +6,6 @@ const createProduct = async (req, res) => {
     img_url,
     description,
     size,
-    feeling,
-    formulation,
     main_ingredient,
     ingredient,
     price,
@@ -18,8 +16,6 @@ const createProduct = async (req, res) => {
     img_url,
     description,
     size,
-    feeling,
-    formulation,
     main_ingredient,
     ingredient,
     price
