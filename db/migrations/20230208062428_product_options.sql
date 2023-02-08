@@ -1,5 +1,5 @@
 -- migrate:up
-CREATE TABLE product_sizes_prices (
+CREATE TABLE product_options (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     product_id INT,
     size VARCHAR(100) NULL,
@@ -10,5 +10,4 @@ CREATE TABLE product_sizes_prices (
 );
 
 -- migrate:down
-DROP TABLE product_sizes_prices;
-
+DROP TABLE product_options;

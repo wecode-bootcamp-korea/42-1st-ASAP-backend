@@ -2,7 +2,7 @@
 CREATE TABLE products (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
-    img_url VARCHAR(3000) NULL,
+    image_url VARCHAR(3000) NULL,
     description VARCHAR(3000) NOT NULL,
     main_ingredient VARCHAR(100) NOT NULL,
     ingredient VARCHAR(3000) NOT NULL,
