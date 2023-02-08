@@ -6,7 +6,7 @@ const getProducts = async () => {
     SELECT
         id,
         name,
-        img_url,
+        image_url,
         description,
         main_ingredient,
         ingredient,
