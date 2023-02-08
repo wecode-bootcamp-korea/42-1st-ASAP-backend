@@ -1,10 +1,10 @@
-const ProService = require('../services/Prodctservice');
+const ProDao = require('../models/Product.dao');
 
 const signUp = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { name, productImg } = req.body;
 
-    await ProService.signUp(email, password);
+    await ProDao.signUp(name, productImg);
 
     res.status(201).end();
   } catch (err) {
@@ -16,7 +16,7 @@ const Delete = async (req, res) => {
   try {
     const {id} = req.params;
 
-    await ProService.Delete(id);
+    await ProDao.Delete(id);
     
     res.status(201).end();
     

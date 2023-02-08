@@ -19,7 +19,7 @@ const Signup = async (email, password) => {
 const deleteProduct = async (id) => {
   const [id] = await AppDataSource.query(
     `
-      DELETE *
+      DELETE*
       FROM products
       WHERE id =${id};    
       `,
