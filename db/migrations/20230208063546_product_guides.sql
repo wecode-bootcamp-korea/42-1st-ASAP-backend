@@ -2,7 +2,7 @@
 CREATE TABLE product_guides (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     product_id INT,
-    img_url VARCHAR(3000) NULL,
+    image_url VARCHAR(3000) NULL,
     video_url VARCHAR(3000) NULL,
     usage_description VARCHAR(3000) NOT NULL,
     usage_amount VARCHAR(20) NULL,
