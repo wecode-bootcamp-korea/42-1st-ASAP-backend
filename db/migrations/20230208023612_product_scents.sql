@@ -1,8 +1,8 @@
 -- migrate:up
-CREATE TABLE scents (
+CREATE TABLE product_scents (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     scent VARCHAR(10)
-  );
+);
 
 -- migrate:down
-DROP TABLE scents;
+DROP TABLE product_scents;
