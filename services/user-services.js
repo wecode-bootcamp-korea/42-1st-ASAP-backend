@@ -2,19 +2,19 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
 const userDao = require('../models/user.dao');
-const { checkEmail } = require('../validators');
+const {checkEmail}  = require('../validators');
 
-const signUp = async(email) => {
-   checkEmail(email)
+const signUp = async(email, password, firstname, lastname, skintype) => {
+ 
+  await checkEmail(email)
   const user = await userDao.connectuser(email);
-
-  if(user){
+    if(user){
     const err = new Error('duplicated email');
     err.statusCode = 400;
     throw err;
   }
   const hashedPassword = await bcrypt.hash(password, 10);
-  await userDao.createuser(email, hashedPassword); 
+  await userDao.createuser(email, hashedPassword, firstname, lastname, skintype); 
 };
 
 const signIn = async ( email, password) => {
