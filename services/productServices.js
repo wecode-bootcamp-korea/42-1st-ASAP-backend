@@ -8,7 +8,17 @@ const getProductsForBodyHands = async () => {
   return await productDao.getProductsForBodyHands();
 };
 
+const getProductsForHands = async () => {
+  return await productDao.getProductsForHands();
+};
+
+const getProductsForBodys = async () => {
+  return await productDao.getProductsForBodys();
+};
+
 module.exports = {
   getProducts,
   getProductsForBodyHands,
+  getProductsForHands,
+  getProductsForBodys,
 };
