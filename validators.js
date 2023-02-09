@@ -13,6 +13,12 @@ const checkPassword = (password) => {
   const cp = new RegExp(
    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[~!@$#$%^&*\-?])[A-Za-z\d~!@$#$%^&*\-?]{8,}/
    );
+
+   if (!cp.test(password)){
+    const err = new Error("invalid password");
+    err.statusCode = 400;
+    throw err;
+   }
 }
 
 module.exports = { 
