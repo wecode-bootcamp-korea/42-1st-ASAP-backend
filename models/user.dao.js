@@ -19,5 +19,24 @@ const createuser = async (email, password, firstname, lastname) => {
   );
 };
 
+const connectuser = async (email) => {
+  const user = await AppDataSource.query(
+    `
+     SELECT 
+     FROM users u(
+      WHERE u.email= ?
+      
 
-module.exports = {createuser} 
+      )
+    `
+    [email]
+    
+  )
+  
+}
+
+
+module.exports = {
+  createuser, 
+  connectuser
+}; 
