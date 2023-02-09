@@ -12,8 +12,8 @@ const signUp = async (req, res) => {
 
     await userService.signUp(email, password, firstname, lastname, skintype);
     return res.status(201).send({message: "SIGNUP_SUCCESS"});
-  }catch (err) {
-    res.status(err.statusCode || 400).json({message: err.message});
+  } catch (err) {
+  res.status(err.statusCode || 400).json({message: err.message});
   }
 };
 
@@ -22,14 +22,14 @@ const signIn = async (req, res) => {
   try{
     const {email, password }= req.body;
 
-   const accessToken = await userService.signIn(email,password);
+    const accessToken = await userService.signIn(email,password);
    
    
-   if( !email || !password ){
+    if( !email || !password ){
     throw new Error("SIGN IN FAILED!");
    }
 
-   return res.status(200).json({accessToken: accessToken});
+    return res.status(200).json({accessToken: accessToken});
   } catch (err){
     res.status(err.statusCode || 400).json ({message: err.message});
   }

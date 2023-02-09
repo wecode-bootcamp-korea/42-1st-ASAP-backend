@@ -10,6 +10,7 @@ const checkEmail = (email) => {
       throw err;
     }
 };
+
 const checkPassword = (password) => {
   const cp = new RegExp(
    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[~!@$#$%^&*\-?])[A-Za-z\d~!@$#$%^&*\-?]{8,}/
