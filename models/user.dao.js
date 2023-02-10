@@ -1,45 +1,43 @@
 const { AppDataSource } = require("./dataSource");
 
-  const createuser = async (email, password, firstname, lastname, skintype) => {
-    
-    try{
-   
-    return AppDataSource.query(
+  const createUser = async (email, password, firstname, lastname, skintype) => {
+    try { return AppDataSource.query(
       `
       INSERT INTO users (
-      email,
-      password, 
-      first_name,
-      last_name,
-      skin_type
-    ) VALUES (
-      ?,
-      ?,
-      ?,
-      ?,
-      ?
-    )
-    `, 
-    [email, password, firstname, lastname, skintype]
-    );
-    }  catch(err) {
-    const error= new Error('INVAID_DATA_INPUT');
-    error.statusCode = 500;
-    throw error;
-  }
+        email,
+        password, 
+        first_name,
+        last_name,
+        skin_type
+      ) VALUES (
+        ?,
+        ?,
+        ?,
+        ?,
+        ?
+       )
+       `, 
+          [email, password, firstname, lastname, skintype]
+      );
+    } catch(err) {
+      const error= new Error('INVAID_DATA_INPUT');
+      error.statusCode = 500;
+      throw error;
+    }
   
 };
 
-
-const connectuser = async (email) => {
+const getuserByEmail = async (email) => {
   const [user] = await AppDataSource.query(
     `
     SELECT 
-      u.id
+      u.id,
+      u.email,
+      u.password
     FROM users u
     WHERE u.email= ?
     `,
-    [email]
+   [email]
   )
 
   return user ;
@@ -47,6 +45,6 @@ const connectuser = async (email) => {
 
 
 module.exports = {
-  createuser, 
-  connectuser
+  createUser, 
+  getuserByEmail
 }; 
