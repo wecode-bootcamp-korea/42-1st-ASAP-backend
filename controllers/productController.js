@@ -1,25 +1,51 @@
 const productService = require('../services/productService');
 
-const getProductsForBodyHands = async (req, res) => {
-  const result = await productService.getProductsForBodyHands();
+const getProductsByMainCategory = async (req, res) => {
+  const mainCategoryId = req.query.mainCategoryId;
+
+  const result = await productService.getProductsByMainCategory(mainCategoryId);
+
+  return res.status(200).json({ data: result });
+};
+
+const getProductById = async (req, res) => {
+  const id = req.query.id;
+
+  const result = await productService.getProductById(id);
 
   return res.status(200).json({ data: result });
 };
 
 const getProductsForHands = async (req, res) => {
-  const result = await productService.getProductsForHands();
+  const formulation = req.query.formulation;
+  const scent = req.query.scent;
+
+  const result = await productService.getProductsForHands(formulation, scent);
 
   return res.status(200).json({ data: result });
 };
 
 const getProductsForBodys = async (req, res) => {
-  const result = await productService.getProductsForBodys();
+  const formulation = req.query.formulation;
+  const scent = req.query.scent;
+
+  const result = await productService.getProductsForBodys(formulation, scent);
+
+  return res.status(200).json({ data: result });
+};
+
+const getProductBySubCategoryId = async (req, res) => {
+  const { subCategoryId } = req.query;
+
+  const result = await productService.getProductBySubCategoryId(subCategoryId);
 
   return res.status(200).json({ data: result });
 };
 
 module.exports = {
-  getProductsForBodyHands,
+  getProductsByMainCategory,
+  getProductById,
   getProductsForHands,
   getProductsForBodys,
+  getProductBySubCategoryId,
 };
