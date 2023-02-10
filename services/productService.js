@@ -46,9 +46,14 @@ const getProductsForBodys = async (formulation, scent) => {
   return await productDao.getProductsForBodys(result);
 };
 
+const getProductsForMainPage = async () => {
+  return await productDao.getProductsForMainPage();
+};
+
 module.exports = {
   getProductsByMainCategory,
   getProductById,
   getProductsForHands,
   getProductsForBodys,
+  getProductsForMainPage,
 };

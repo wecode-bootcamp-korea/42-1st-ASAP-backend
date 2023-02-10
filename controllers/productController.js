@@ -34,10 +34,8 @@ const getProductsForBodys = async (req, res) => {
   return res.status(200).json({ data: result });
 };
 
-const getProductBySubCategoryId = async (req, res) => {
-  const { subCategoryId } = req.query;
-
-  const result = await productService.getProductBySubCategoryId(subCategoryId);
+const getProductsForMainPage = async (req, res) => {
+  const result = await productService.getProductsForMainPage();
 
   return res.status(200).json({ data: result });
 };
@@ -47,5 +45,5 @@ module.exports = {
   getProductById,
   getProductsForHands,
   getProductsForBodys,
-  getProductBySubCategoryId,
+  getProductsForMainPage,
 };

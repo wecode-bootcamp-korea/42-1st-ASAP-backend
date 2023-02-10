@@ -217,9 +217,25 @@ const getProductsForBodys = async (result) => {
   );
 };
 
+const getProductsForMainPage = async () => {
+  return await mysqlDataSource.query(
+    `
+    SELECT     
+      p.id,
+      p.name,
+      p.image_url,
+      p.description
+    FROM products p
+    ORDER BY RAND()
+    LIMIT 5;
+    `
+  );
+};
+
 module.exports = {
   getProductsByMainCategory,
   getProductById,
   getProductsForHands,
   getProductsForBodys,
+  getProductsForMainPage,
 };
