@@ -164,7 +164,8 @@ const getProductsForHands = async (result) => {
       GROUP BY product_id
     ) prod_f ON p.id=prod_f.product_id
     INNER JOIN product_formulations pfm ON p.product_formulation_id=pfm.id
-    ${whereClause};
+    ${whereClause} 
+    LIMIT 5;
     `
   );
 };
@@ -212,7 +213,8 @@ const getProductsForBodys = async (result) => {
       GROUP BY product_id
     ) prod_f ON p.id=prod_f.product_id
     INNER JOIN product_formulations pfm ON p.product_formulation_id=pfm.id
-    ${whereClause};
+    ${whereClause} 
+    LIMIT 5;
     `
   );
 };
