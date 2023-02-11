@@ -1,49 +1,48 @@
 const productService = require('../services/productService');
 
+const getProducts = async (req, res) => {
+  const limitValue = req.query.limit;
+
+  const result = await productService.getProducts(limitValue);
+
+  return res.status(200).json({ data: result });
+};
+
 const getProductsByMainCategory = async (req, res) => {
-  const mainCategoryId = req.query.mainCategoryId;
+  const { mainCategoryId } = req.params;
 
   const result = await productService.getProductsByMainCategory(mainCategoryId);
 
   return res.status(200).json({ data: result });
 };
 
+const getProductsBySubCategory = async (req, res) => {
+  const { mainCategoryId, subCategoryId } = req.params;
+  const formulation = req.query.formulation;
+  const scent = req.query.scent;
+  const limitValue = req.query.limit;
+
+  const result = await productService.getProductsBySubCategory(
+    mainCategoryId,
+    subCategoryId,
+    formulation,
+    scent,
+    limitValue
+  );
+
+  return res.status(200).json({ data: result });
+};
+
 const getProductById = async (req, res) => {
-  const id = req.query.id;
+  const { productId } = req.params;
 
-  const result = await productService.getProductById(id);
-
-  return res.status(200).json({ data: result });
-};
-
-const getProductsForHands = async (req, res) => {
-  const formulation = req.query.formulation;
-  const scent = req.query.scent;
-
-  const result = await productService.getProductsForHands(formulation, scent);
+  const result = await productService.getProductById(productId);
 
   return res.status(200).json({ data: result });
 };
-
-const getProductsForBodys = async (req, res) => {
-  const formulation = req.query.formulation;
-  const scent = req.query.scent;
-
-  const result = await productService.getProductsForBodys(formulation, scent);
-
-  return res.status(200).json({ data: result });
-};
-
-const getProductsForMainPage = async (req, res) => {
-  const result = await productService.getProductsForMainPage();
-
-  return res.status(200).json({ data: result });
-};
-
 module.exports = {
+  getProducts,
   getProductsByMainCategory,
+  getProductsBySubCategory,
   getProductById,
-  getProductsForHands,
-  getProductsForBodys,
-  getProductsForMainPage,
 };

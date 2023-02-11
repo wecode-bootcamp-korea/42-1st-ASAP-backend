@@ -3,11 +3,13 @@ const router = express.Router();
 
 const productController = require('../controllers/productController');
 
-router.get('/', productController.getProductsForMainPage);
-router.get('/products', productController.getProductsByMainCategory);
-router.get('/body-hand/hand', productController.getProductsForHands);
-router.get('/body-hand/body', productController.getProductsForBodys);
-router.get('/products/detail', productController.getProductById);
+router.get('/', productController.getProducts);
+router.get('/detail/:productId', productController.getProductById);
+router.get('/:mainCategoryId', productController.getProductsByMainCategory);
+router.get(
+  '/:mainCategoryId/:subCategoryId',
+  productController.getProductsBySubCategory
+);
 
 module.exports = {
   router,
