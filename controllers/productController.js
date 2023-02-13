@@ -1,9 +1,9 @@
 const productService = require('../services/productService');
 
 const getProducts = async (req, res) => {
-  const limitValue = req.query.limit;
+  const { limit } = req.query;
 
-  const result = await productService.getProducts(limitValue);
+  const result = await productService.getProducts(limit);
 
   return res.status(200).json({ data: result });
 };
@@ -18,16 +18,14 @@ const getProductsByMainCategory = async (req, res) => {
 
 const getProductsBySubCategory = async (req, res) => {
   const { mainCategoryId, subCategoryId } = req.params;
-  const formulation = req.query.formulation;
-  const scent = req.query.scent;
-  const limitValue = req.query.limit;
+  const { formulation, scent, limit } = req.query;
 
   const result = await productService.getProductsBySubCategory(
     mainCategoryId,
     subCategoryId,
     formulation,
     scent,
-    limitValue
+    limit
   );
 
   return res.status(200).json({ data: result });
