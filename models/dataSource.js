@@ -1,6 +1,6 @@
 const { DataSource } = require('typeorm');
 
-const mysqlDataSource = new DataSource({
+const AppDataSource = new DataSource({
   type: process.env.TYPEORM_CONNECTION,
   host: process.env.TYPEORM_HOST,
   port: process.env.TYPEORM_PORT,
@@ -9,14 +9,13 @@ const mysqlDataSource = new DataSource({
   database: process.env.TYPEORM_DATABASE,
 });
 
-mysqlDataSource
-  .initialize()
+AppDataSource.initialize()
   .then(() => {
     console.log('Data Source has been initialized!');
   })
   .catch((err) => {
     console.error('Error during Data Source initialization', err);
-    mysqlDataSource.destroy();
+    AppDataSource.destroy();
   });
 
-module.exports = mysqlDataSource;
+module.exports = AppDataSource;
