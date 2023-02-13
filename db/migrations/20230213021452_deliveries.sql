@@ -6,7 +6,7 @@ CREATE TABLE deliveries (
     message VARCHAR(100) NULL,
     country_code INT NOT NULL ,
     phone_number VARCHAR(20) NOT NULL ,
-    country VARCHAR(30) NULL,
+    country VARCHAR(30) NOT NULL,
     adress VARCHAR(50) NOT NULL,
     user_id INT NOT NULL,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -16,4 +16,3 @@ CREATE TABLE deliveries (
 
 -- migrate:down
 DROP TABLE deliveries;
-
