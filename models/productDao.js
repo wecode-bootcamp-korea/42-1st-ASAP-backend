@@ -1,4 +1,5 @@
 const mysqlDataSource = require('./dataSource');
+const QueryBuilder = require('./productListQuery');
 
 const getProducts = async (limit) => {
   const limitClause = limit;
@@ -178,9 +179,17 @@ const getProductsBySubCategory = async (
   scent,
   limit
 ) => {
-  const formulationClause = formulation;
-  const scentClause = scent;
-  const limitClause = limit;
+  const queryBuilder = new QueryBuilder(
+    mainCategoryId,
+    subCategoryId,
+    formulation,
+    scent,
+    limit
+  );
+  const query = queryBuilder.buildQuery();
+  //   const formulationClause = formulation;
+  //   const scentClause = scent;
+  //   const limitClause = limit;
 
   return await mysqlDataSource.query(
     `
@@ -260,10 +269,8 @@ const getProductsBySubCategory = async (
         GROUP BY product_id
     ) prod_g ON p.id=prod_g.product_id
     INNER JOIN product_formulations pfm ON p.product_formulation_id=pfm.id
-    WHERE sub_cat.main_category_id=? AND p.sub_category_id=? ${formulationClause} ${scentClause}
-    ${limitClause};
-    `,
-    [mainCategoryId, subCategoryId]
+    ${query}
+    `
   );
 };
 
@@ -358,3 +365,9 @@ module.exports = {
   getProductsBySubCategory,
   getProductById,
 };
+
+// WHERE sub_cat.main_category_id=? AND p.sub_category_id=? ${formulationClause} ${scentClause}
+// ${limitClause};
+
+// ,
+//     [mainCategoryId, subCategoryId]

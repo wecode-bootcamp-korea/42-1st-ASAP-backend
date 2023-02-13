@@ -18,32 +18,32 @@ const getProductsBySubCategory = async (
   subCategoryId,
   formulation,
   scent,
-  limitValue
+  limit
 ) => {
-  let formulationResult = ``;
+  // let formulationResult = ``;
 
-  if (formulation) {
-    formulationResult = `AND pfm.formulation like "%${formulation}%"`;
-  }
+  // if (formulation) {
+  //   formulationResult = `AND pfm.formulation like "%${formulation}%"`;
+  // }
 
-  let scentResult = ``;
+  // let scentResult = ``;
 
-  if (scent) {
-    scentResult = `AND prod_s.scents like "%${scent}%"`;
-  }
+  // if (scent) {
+  //   scentResult = `AND prod_s.scents like "%${scent}%"`;
+  // }
 
-  let limitResult = ``;
+  // let limitResult = ``;
 
-  if (limitValue) {
-    limitResult = `LIMIT ${limitValue}`;
-  }
+  // if (limit) {
+  //   limitResult = `LIMIT ${limit}`;
+  // }
 
   return await productDao.getProductsBySubCategory(
     mainCategoryId,
     subCategoryId,
-    formulationResult,
-    scentResult,
-    limitResult
+    formulation,
+    scent,
+    limit
   );
 };
 
