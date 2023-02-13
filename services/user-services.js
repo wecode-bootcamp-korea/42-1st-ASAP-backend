@@ -27,14 +27,14 @@ const signIn = async(email, password) =>{
    await validate.validatePassword(password);
 
    const user = await userDao.getuserByEmail(email);
-   const payLoad = { userId: user.email };
-   const Buffer = user.password
-   const checkHash = await bcrypt.compare(password, Buffer.toString());
+   const payLoad = { userId: user.id };
+   const hashedPassword = user.password
+   const checkHash = await bcrypt.compare(password, hashedPassword.toString());
    
    
    if (!user) {
     const err = new Error('user does not exist');
-    err.statusCode = 404;
+    err.statusCode = 400;
     throw err;
    };
    

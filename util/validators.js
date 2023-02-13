@@ -1,4 +1,4 @@
-const validateEmail = (email) => {
+const validateEmail = async (email) => {
   const emailRegex= new RegExp(
     /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/
     );
@@ -10,7 +10,7 @@ const validateEmail = (email) => {
     }
 };
 
-const validatePassword = (password) => {
+const validatePassword = async (password) => {
   const passwordRegex= new RegExp(
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[~!@$#$%^&*\-?])[A-Za-z\d~!@$#$%^&*\-?]{8,20}/
       );
