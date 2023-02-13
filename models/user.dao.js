@@ -1,7 +1,8 @@
 const { AppDataSource } = require("./dataSource");
 
   const createUser = async (email, password, firstname, lastname, skintype) => {
-    try { return AppDataSource.query(
+    try { 
+      return AppDataSource.query(
       `
       INSERT INTO users (
         email,
@@ -23,7 +24,7 @@ const { AppDataSource } = require("./dataSource");
       const error= new Error('INVAID_DATA_INPUT');
       error.statusCode = 500;
       throw error;
-    }
+      }
   
 };
 
