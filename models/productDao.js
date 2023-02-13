@@ -171,8 +171,15 @@ const getProductsByMainCategory = async (mainCategoryId) => {
   );
 };
 
-const getProductsBySubCategory = async (result, limit) => {
-  const whereClause = result;
+const getProductsBySubCategory = async (
+  mainCategoryId,
+  subCategoryId,
+  formulation,
+  scent,
+  limit
+) => {
+  const formulationClause = formulation;
+  const scentClause = scent;
   const limitClause = limit;
 
   return await mysqlDataSource.query(
@@ -192,7 +199,7 @@ const getProductsBySubCategory = async (result, limit) => {
       p.ingredient,
       prod_o.options,
       prod_g.guides,
-      pfm.formulation
+      pfm.formulation 
     FROM products p
     INNER JOIN (
       SELECT
@@ -253,9 +260,10 @@ const getProductsBySubCategory = async (result, limit) => {
         GROUP BY product_id
     ) prod_g ON p.id=prod_g.product_id
     INNER JOIN product_formulations pfm ON p.product_formulation_id=pfm.id
-    ${whereClause}
-    ${limitClause}
-    `
+    WHERE sub_cat.main_category_id=? AND p.sub_category_id=? ${formulationClause} ${scentClause}
+    ${limitClause};
+    `,
+    [mainCategoryId, subCategoryId]
   );
 };
 

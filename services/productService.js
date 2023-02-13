@@ -20,16 +20,16 @@ const getProductsBySubCategory = async (
   scent,
   limitValue
 ) => {
-  let result = ``;
+  let formulationResult = ``;
 
-  if (formulation && scent) {
-    result = `WHERE sub_cat.main_category_id=${mainCategoryId} AND p.sub_category_id=${subCategoryId} AND pfm.formulation like "%${formulation}%" AND prod_s.scents like "%${scent}%"`;
-  } else if (scent) {
-    result = `WHERE sub_cat.main_category_id=${mainCategoryId} AND p.sub_category_id=${subCategoryId} AND prod_s.scents like "%${scent}%"`;
-  } else if (formulation) {
-    result = `WHERE sub_cat.main_category_id=${mainCategoryId} AND p.sub_category_id=${subCategoryId} AND pfm.formulation like "%${formulation}%"`;
-  } else {
-    result = `WHERE sub_cat.main_category_id=${mainCategoryId} AND p.sub_category_id=${subCategoryId}`;
+  if (formulation) {
+    formulationResult = `AND pfm.formulation like "%${formulation}%"`;
+  }
+
+  let scentResult = ``;
+
+  if (scent) {
+    scentResult = `AND prod_s.scents like "%${scent}%"`;
   }
 
   let limitResult = ``;
@@ -38,7 +38,13 @@ const getProductsBySubCategory = async (
     limitResult = `LIMIT ${limitValue}`;
   }
 
-  return await productDao.getProductsBySubCategory(result, limitResult);
+  return await productDao.getProductsBySubCategory(
+    mainCategoryId,
+    subCategoryId,
+    formulationResult,
+    scentResult,
+    limitResult
+  );
 };
 
 const getProductById = async (productId) => {
