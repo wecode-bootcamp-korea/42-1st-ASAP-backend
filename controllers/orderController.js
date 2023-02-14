@@ -3,8 +3,8 @@ const { catchAsync } = require('../utils/error');
 
 const createCart = catchAsync(async (req, res) => {
   try {
-    const { userId, productOptionId, quantity } = req.body;
-    // const userId = req.user.userId;
+    const { productOptionId, quantity } = req.body;
+    const userId = req.user.userId;
 
     await orderService.createCart(userId, productOptionId, quantity);
 
@@ -14,17 +14,31 @@ const createCart = catchAsync(async (req, res) => {
   }
 });
 
-// const getTotalPrice = catchAsync(async (req, res) => {
-//   try {
-//     const userId = req.user.userId;
+const updateCart = catchAsync(async (req, res) => {
+  try {
+    const { productOptionId, quantity } = req.body;
+    const userId = req.user.userId;
 
-//     await orderService.getTotalPrice(userId);
+    await orderService.updateCart(userId, productOptionId, quantity);
 
-//     return res.status(201).json({ message: 'get Total Price Successfully' });
-//   } catch (error) {
-//     return res.status(error.code).json({ message: error.message });
-//   }
-// });
+    return res.status(201).json({ message: 'cartUpdated' });
+  } catch (error) {
+    return res.status(error.code).json({ message: error.message });
+  }
+});
+
+const deleteCart = catchAsync(async (req, res) => {
+  try {
+    const { productOptionId } = req.body;
+    const userId = req.user.userId;
+
+    await orderService.deleteCart(userId, productOptionId);
+
+    return res.status(201).json({ message: 'cartDeleted' });
+  } catch (error) {
+    return res.status(error.code).json({ message: error.message });
+  }
+});
 
 const createDelivery = catchAsync(async (req, res) => {
   try {
@@ -84,6 +98,8 @@ const createOrderItem = catchAsync(async (req, res) => {
 
 module.exports = {
   createCart,
+  updateCart,
+  deleteCart,
   createDelivery,
   createOrder,
   createOrderItem,

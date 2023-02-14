@@ -4,9 +4,13 @@ const createCart = async (userId, productOptionId, quantity) => {
   return await orderDao.createCart(userId, productOptionId, quantity);
 };
 
-// const getTotalPrice = async (userId) => {
-//   return await orderDao.getTotalPrice(userId);
-// };
+const updateCart = async (userId, productOptionId, quantity) => {
+  return await orderDao.updateCart(userId, productOptionId, quantity);
+};
+
+const deleteCart = async (userId, productOptionId) => {
+  return await orderDao.deleteCart(userId, productOptionId);
+};
 
 const createDelivery = async (
   lastName,
@@ -40,6 +44,8 @@ const createOrderItem = async (orderId, productId, quantity, userId) => {
 
 module.exports = {
   createCart,
+  updateCart,
+  deleteCart,
   createDelivery,
   createOrder,
   createOrderItem,

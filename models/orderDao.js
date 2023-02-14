@@ -18,6 +18,28 @@ const createCart = async (userId, productOptionId, quantity) => {
   );
 };
 
+const updateCart = async (userId, productOptionId, quantity) => {
+  await mysqlDataSource.query(
+    `
+    UPDATE carts
+    SET quantity=?
+    WHERE user_id=? AND product_options_id=?;
+    `,
+    [quantity, userId, productOptionId]
+  );
+};
+
+const deleteCart = async (userId, productOptionId) => {
+  await mysqlDataSource.query(
+    `
+    DELETE
+    FROM carts
+    WHERE user_id=? AND product_options_id=?;
+    `,
+    [userId, productOptionId]
+  );
+};
+
 const getTotalPrice = async (userId) => {
   await mysqlDataSource.query(
     `
@@ -124,6 +146,8 @@ const createOrderItem = async (orderId, productId, quantity) => {
 
 module.exports = {
   createCart,
+  updateCart,
+  deleteCart,
   createDelivery,
   createOrder,
   createOrderItem,
