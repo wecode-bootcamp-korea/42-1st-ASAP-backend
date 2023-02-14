@@ -135,18 +135,6 @@ const createOrder = async (userId, deliveryId) => {
 };
 
 const createOrderItem = async (userId, orderId) => {
-  //   const [result] = await mysqlDataSource.query(
-  //     `SELECT
-  //     c.user_id,
-  //     c.product_options_id,
-  //     c.quantity
-  //   FROM carts c
-  //   WHERE c.user_id=?;
-
-  //       `,
-  //     [userId]
-  //   );
-  // };
   const [cart] = await mysqlDataSource.query(
     `
 	SELECT
@@ -159,11 +147,8 @@ const createOrderItem = async (userId, orderId) => {
     [userId]
   );
 
-  console.log(cart);
   const productOptionId = cart['product_options_id'];
   const quantity = cart['quantity'];
-  console.log(productOptionId);
-  console.log(quantity);
 
   await mysqlDataSource.query(
     `
@@ -182,13 +167,6 @@ const createOrderItem = async (userId, orderId) => {
    `,
     [orderId, productOptionId, quantity]
   );
-  // await mysqlDataSource.query(
-  //   `
-  //     INSERT INTO order_items (order_id, order_status_id, product_id, quantity) VALUES (?, 1, ?, ?);
-
-  //     `,
-  //   [orderId, productId, quantity]
-  // );
 };
 
 module.exports = {

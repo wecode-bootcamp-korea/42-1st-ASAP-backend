@@ -3,8 +3,8 @@ const { catchAsync } = require('../utils/error');
 
 const createCart = catchAsync(async (req, res) => {
   try {
-    const { userId, productOptionId, quantity } = req.body;
-    // const userId = req.user.userId;
+    const { productOptionId, quantity } = req.body;
+    const userId = req.user;
 
     await orderService.createCart(userId, productOptionId, quantity);
 
@@ -17,7 +17,7 @@ const createCart = catchAsync(async (req, res) => {
 const updateCart = catchAsync(async (req, res) => {
   try {
     const { productOptionId, quantity } = req.body;
-    const userId = req.user.userId;
+    const userId = req.user;
 
     await orderService.updateCart(userId, productOptionId, quantity);
 
@@ -30,7 +30,7 @@ const updateCart = catchAsync(async (req, res) => {
 const deleteCart = catchAsync(async (req, res) => {
   try {
     const { productOptionId } = req.body;
-    const userId = req.user.userId;
+    const userId = req.user;
 
     await orderService.deleteCart(userId, productOptionId);
 
@@ -51,7 +51,7 @@ const createDelivery = catchAsync(async (req, res) => {
       country,
       address,
     } = req.body;
-    const userId = req.user.userId;
+    const userId = req.user;
 
     await orderService.createDelivery(
       lastName,
@@ -73,7 +73,7 @@ const createDelivery = catchAsync(async (req, res) => {
 const createOrder = catchAsync(async (req, res) => {
   try {
     const { deliveryId } = req.params;
-    const userId = req.user.userId;
+    const userId = req.user;
 
     await orderService.createOrder(userId, deliveryId);
 
@@ -86,7 +86,7 @@ const createOrder = catchAsync(async (req, res) => {
 const createOrderItem = catchAsync(async (req, res) => {
   try {
     const { orderId } = req.params;
-    const userId = req.user.userId;
+    const userId = req.user;
 
     await orderService.createOrderItem(orderId, userId);
 
