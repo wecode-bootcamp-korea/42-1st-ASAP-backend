@@ -3,8 +3,8 @@ const { catchAsync } = require('../utils/error');
 
 const createCart = catchAsync(async (req, res) => {
   try {
-    const { productOptionId, quantity } = req.body;
-    const userId = req.user.userId;
+    const { userId, productOptionId, quantity } = req.body;
+    // const userId = req.user.userId;
 
     await orderService.createCart(userId, productOptionId, quantity);
 

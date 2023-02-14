@@ -41,6 +41,7 @@ const getProducts = async (limit) => {
             po.product_id,
             JSON_ARRAYAGG(
                 JSON_OBJECT(
+                    "product_options_id", po.id,
                     "size", po.size, 
                     "price", po.price
                 )
@@ -126,6 +127,7 @@ const getProductsByMainCategory = async (mainCategoryId) => {
             po.product_id,
             JSON_ARRAYAGG(
                 JSON_OBJECT(
+                    "product_options_id", po.id,
                     "size", po.size, 
                     "price", po.price
                 )
@@ -226,6 +228,7 @@ const getProductsBySubCategory = async (
             po.product_id,
             JSON_ARRAYAGG(
                 JSON_OBJECT(
+                    "product_options_id", po.id,
                     "size", po.size, 
                     "price", po.price
                 )
@@ -310,6 +313,7 @@ const getProductById = async (productId) => {
             po.product_id,
             JSON_ARRAYAGG(
                 JSON_OBJECT(
+                    "product_options_id", po.id,
                     "size", po.size, 
                     "price", po.price
                 )

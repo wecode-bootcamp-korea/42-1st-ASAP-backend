@@ -134,7 +134,20 @@ const createOrder = async (userId, deliveryId) => {
   );
 };
 
-const createOrderItem = async (orderId, productId, quantity) => {
+const createOrderItem = async (userId, orderId, productId, quantity) => {
+//   const [result] = await mysqlDataSource.query(
+//     `SELECT
+//     c.user_id,
+//     c.product_options_id,
+//     c.quantity
+//   FROM carts c
+//   WHERE c.user_id=?;
+      
+
+//       `,
+//     [userId]
+//   );
+// };
   await mysqlDataSource.query(
     `
       INSERT INTO order_items (order_id, order_status_id, product_id, quantity) VALUES (?, 1, ?, ?);
