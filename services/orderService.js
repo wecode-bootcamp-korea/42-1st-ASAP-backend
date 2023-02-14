@@ -30,8 +30,13 @@ const createOrder = async (userId, deliveryId) => {
   return await orderDao.createOrder(userId, deliveryId);
 };
 
+const createOrderItem = async (orderId, productId, quantity) => {
+  return await orderDao.createOrderItem(orderId, productId, quantity);
+};
+
 module.exports = {
   createCart,
   createDelivery,
   createOrder,
+  createOrderItem,
 };

@@ -80,8 +80,19 @@ const createOrder = async (userId, deliveryId) => {
   );
 };
 
+const createOrderItem = async (orderId, productId, quantity) => {
+  await mysqlDataSource.query(
+    `
+      INSERT INTO order_items (order_id, order_status_id, product_id, quantity) VALUES (?, 1, ?, ?);
+
+      `,
+    [orderId, productId, quantity]
+  );
+};
+
 module.exports = {
   createCart,
   createDelivery,
   createOrder,
+  createOrderItem,
 };
