@@ -4,6 +4,10 @@ const createCart = async (userId, productOptionId, quantity) => {
   return await orderDao.createCart(userId, productOptionId, quantity);
 };
 
+// const getTotalPrice = async (userId) => {
+//   return await orderDao.getTotalPrice(userId);
+// };
+
 const createDelivery = async (
   lastName,
   firstName,
