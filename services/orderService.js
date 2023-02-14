@@ -1,7 +1,7 @@
 const orderDao = require('../models/orderDao');
 
-const createCart = async (userId, productId, quantity) => {
-  return await orderDao.createCart(userId, productId, quantity);
+const createCart = async (userId, productOptionId, quantity) => {
+  return await orderDao.createCart(userId, productOptionId, quantity);
 };
 
 const createDelivery = async (

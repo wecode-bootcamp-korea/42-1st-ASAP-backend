@@ -2,9 +2,9 @@ const orderService = require('../services/orderService');
 
 const createCart = async (req, res) => {
   try {
-    const { userId, productId, quantity } = req.body;
+    const { userId, productOptionId, quantity } = req.body;
 
-    await orderService.createCart(userId, productId, quantity);
+    await orderService.createCart(userId, productOptionId, quantity);
 
     return res.status(201).json({ message: 'cartCreated' });
   } catch (error) {

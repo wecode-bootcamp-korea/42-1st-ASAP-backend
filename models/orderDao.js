@@ -1,11 +1,11 @@
 const mysqlDataSource = require('./dataSource');
 
-const createCart = async (userId, productId, quantity) => {
+const createCart = async (userId, productOptionId, quantity) => {
   await mysqlDataSource.query(
     `
     INSERT INTO carts (
       user_id,
-      product_id,
+      product_options_id,
       quantity
     )
     VALUES (
@@ -14,7 +14,7 @@ const createCart = async (userId, productId, quantity) => {
       ?
     );
     `,
-    [userId, productId, quantity]
+    [userId, productOptionId, quantity]
   );
 };
 
