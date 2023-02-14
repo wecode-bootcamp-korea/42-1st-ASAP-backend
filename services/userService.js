@@ -1,8 +1,8 @@
-const userDao = require('../models/userDao');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+
+const userDao = require('../models/userDao');
 const validate = require('../utils/validators');
-const SecretKey = process.env.SECRET_KEY;
 
 const signUp = async (email, password, firstname, lastname, skintype) => {
   await validate.validateEmail(email);
@@ -28,6 +28,8 @@ const signUp = async (email, password, firstname, lastname, skintype) => {
 };
 
 const signIn = async (email, password) => {
+  const SECRET_KEY = process.env.SECRET_KEY;
+
   await validate.validateEmail(email);
   await validate.validatePassword(password);
 
@@ -48,7 +50,7 @@ const signIn = async (email, password) => {
     throw err;
   }
 
-  return jwt.sign(payLoad, SecretKey);
+  return jwt.sign(payLoad, SECRET_KEY);
 };
 
 module.exports = {
