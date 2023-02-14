@@ -1,6 +1,7 @@
 const orderService = require('../services/orderService');
+const { catchAsync } = require('../utils/error');
 
-const createCart = async (req, res) => {
+const createCart = catchAsync(async (req, res) => {
   try {
     const { userId, productOptionId, quantity } = req.body;
 
@@ -10,9 +11,9 @@ const createCart = async (req, res) => {
   } catch (error) {
     return res.status(error.code).json({ message: error.message });
   }
-};
+});
 
-const createDelivery = async (req, res) => {
+const createDelivery = catchAsync(async (req, res) => {
   try {
     const {
       lastName,
@@ -40,9 +41,9 @@ const createDelivery = async (req, res) => {
   } catch (error) {
     return res.status(error.code).json({ message: error.message });
   }
-};
+});
 
-const createOrder = async (req, res) => {
+const createOrder = catchAsync(async (req, res) => {
   try {
     const { userId, deliveryId } = req.params;
 
@@ -52,9 +53,9 @@ const createOrder = async (req, res) => {
   } catch (error) {
     return res.status(error.code).json({ message: error.message });
   }
-};
+});
 
-const createOrderItem = async (req, res) => {
+const createOrderItem = catchAsync(async (req, res) => {
   try {
     const { orderId } = req.params;
     const { productId, quantity } = req.body;
@@ -65,7 +66,7 @@ const createOrderItem = async (req, res) => {
   } catch (error) {
     return res.status(error.code).json({ message: error.message });
   }
-};
+});
 
 module.exports = {
   createCart,

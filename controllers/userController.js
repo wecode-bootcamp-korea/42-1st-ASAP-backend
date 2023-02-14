@@ -1,6 +1,7 @@
 const userService = require('../services/userService');
+const { catchAsync } = require('../utils/error');
 
-const signUp = async (req, res) => {
+const signUp = catchAsync(async (req, res) => {
   try {
     const { email, password, firstname, lastname, skintype } = req.body;
 
@@ -14,9 +15,9 @@ const signUp = async (req, res) => {
   } catch (err) {
     return res.status(err.statusCode || 400).json({ message: err.message });
   }
-};
+});
 
-const signIn = async (req, res) => {
+const signIn = catchAsync(async (req, res) => {
   try {
     const { email, password } = req.body;
 
@@ -29,7 +30,7 @@ const signIn = async (req, res) => {
   } catch (err) {
     return res.status(err.statusCode || 400).json({ message: err.message });
   }
-};
+});
 
 module.exports = {
   signUp,
