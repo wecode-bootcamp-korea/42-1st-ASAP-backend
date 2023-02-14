@@ -86,9 +86,9 @@ const createOrder = catchAsync(async (req, res) => {
 const createOrderItem = catchAsync(async (req, res) => {
   try {
     const { orderId } = req.params;
-    const { productId, quantity } = req.body;
+    const userId = req.user.userId;
 
-    await orderService.createOrderItem(orderId, productId, quantity, userId);
+    await orderService.createOrderItem(orderId, userId);
 
     return res.status(201).json({ message: 'orderItemCreated' });
   } catch (error) {
