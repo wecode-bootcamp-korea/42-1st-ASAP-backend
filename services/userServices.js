@@ -1,7 +1,7 @@
-const userDao = require('../models/user.dao');
+const userDao = require('../models/userDao');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
-const validate = require('../util/validators');
+const validate = require('../utils/validators');
 const SecretKey = process.env.SECRET_KEY
 
 const signUp = async(email, password, firstname, lastname, skintype) => {

@@ -1,4 +1,4 @@
-const userService = require('../services/user-services');
+const userService = require('../services/userServices');
 
 const signUp = async (req, res) => {
   try {
@@ -23,9 +23,9 @@ const signIn = async (req, res) => {
     if( !email || !password ) {
       throw new Error("KEY Error!");
     }
-    await userService.signIn(email,password);
+    const result = await userService.signIn(email,password);
 
-    return res.status(200).json(("SIGNIN SUCCESS!"));
+    return res.status(200).json({ accessToken: result });
 
   } catch (err) {
     return res.status(err.statusCode || 400).json ({message: err.message});
