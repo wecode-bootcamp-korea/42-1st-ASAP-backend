@@ -30,7 +30,7 @@ const createOrder = async (userId, deliveryId) => {
   return await orderDao.createOrder(userId, deliveryId);
 };
 
-const createOrderItem = async (orderId, productId, quantity) => {
+const createOrderItem = async (orderId, productId, quantity, userId) => {
   return await orderDao.createOrderItem(orderId, productId, quantity);
 };
 

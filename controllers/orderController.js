@@ -3,7 +3,8 @@ const { catchAsync } = require('../utils/error');
 
 const createCart = catchAsync(async (req, res) => {
   try {
-    const { userId, productOptionId, quantity } = req.body;
+    const { productOptionId, quantity } = req.body;
+    const userId = req.user.userId;
 
     await orderService.createCart(userId, productOptionId, quantity);
 
@@ -23,8 +24,8 @@ const createDelivery = catchAsync(async (req, res) => {
       phoneNumber,
       country,
       address,
-      userId,
     } = req.body;
+    const userId = req.user.userId;
 
     await orderService.createDelivery(
       lastName,
@@ -45,7 +46,8 @@ const createDelivery = catchAsync(async (req, res) => {
 
 const createOrder = catchAsync(async (req, res) => {
   try {
-    const { userId, deliveryId } = req.params;
+    const { deliveryId } = req.params;
+    const userId = req.user.userId;
 
     await orderService.createOrder(userId, deliveryId);
 
@@ -60,7 +62,7 @@ const createOrderItem = catchAsync(async (req, res) => {
     const { orderId } = req.params;
     const { productId, quantity } = req.body;
 
-    await orderService.createOrderItem(orderId, productId, quantity);
+    await orderService.createOrderItem(orderId, productId, quantity, userId);
 
     return res.status(201).json({ message: 'orderItemCreated' });
   } catch (error) {
