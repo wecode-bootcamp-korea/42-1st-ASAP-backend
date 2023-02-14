@@ -1,9 +1,10 @@
 -- migrate:up
 CREATE TABLE order_items (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    product_option_id INT,
-    order_id INT,
-    order_status_id INT,
+    product_option_id INT NOT NULL,
+    order_id INT NOT NULL,
+    order_status_id INT NOT NULL,
+	quantity INT NOT NULL,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NULL ON UPDATE CURRENT_TIMESTAMP,
     CONSTRAINT order_items_product_option_id_fkey FOREIGN KEY (product_option_id) REFERENCES product_options (id),
