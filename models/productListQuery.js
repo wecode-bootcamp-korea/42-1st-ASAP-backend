@@ -20,6 +20,7 @@ class QueryBuilder {
   createWhereClause() {
     const whereConditions = Object.entries(this.whereParams).map(
       ([key, value]) => {
+        // console.log(this.whereMapper[key](value));
         return this.whereMapper[key](value);
       }
     );
@@ -46,6 +47,9 @@ class QueryBuilder {
   }
 
   scentFilterBuilder(scent) {
+    console.log(scent);
+    for (let scent of scent) {
+    }
     return `prod_s.scents like "%${scent}%"`;
   }
 

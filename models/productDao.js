@@ -195,6 +195,7 @@ const getProductsBySubCategory = async (
   scent,
   limit
 ) => {
+  // console.log(scent);
   const queryBuilder = new QueryBuilder(
     mainCategoryId,
     subCategoryId,
@@ -202,7 +203,9 @@ const getProductsBySubCategory = async (
     scent,
     limit
   );
+
   const query = queryBuilder.buildQuery();
+  // console.log(query);
 
   return await mysqlDataSource.query(
     `
