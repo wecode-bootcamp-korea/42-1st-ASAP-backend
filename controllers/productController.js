@@ -11,8 +11,12 @@ const getProducts = catchAsync(async (req, res) => {
 
 const getProductsByMainCategory = catchAsync(async (req, res) => {
   const { mainCategoryId } = req.params;
+  const { limit } = req.query;
 
-  const result = await productService.getProductsByMainCategory(mainCategoryId);
+  const result = await productService.getProductsByMainCategory(
+    mainCategoryId,
+    limit
+  );
 
   return res.status(200).json({ data: result });
 });

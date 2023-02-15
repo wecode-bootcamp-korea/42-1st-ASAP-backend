@@ -4,8 +4,8 @@ const getProducts = async (limit) => {
   return await productDao.getProducts(limit);
 };
 
-const getProductsByMainCategory = async (mainCategoryId) => {
-  return await productDao.getProductsByMainCategory(mainCategoryId);
+const getProductsByMainCategory = async (mainCategoryId, limit) => {
+  return await productDao.getProductsByMainCategory(mainCategoryId, limit);
 };
 
 const getProductsBySubCategory = async (

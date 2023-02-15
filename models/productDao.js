@@ -41,6 +41,7 @@ const getProducts = async (limit) => {
             po.product_id,
             JSON_ARRAYAGG(
                 JSON_OBJECT(
+                    "product_option_id", po.id,
                     "size", po.size, 
                     "price", po.price
                 )
@@ -87,7 +88,8 @@ const getProducts = async (limit) => {
   );
 };
 
-const getProductsByMainCategory = async (mainCategoryId) => {
+const getProductsByMainCategory = async (mainCategoryId, limit) => {
+  limit = Number(limit);
   return await mysqlDataSource.query(
     `
     SELECT
@@ -126,6 +128,7 @@ const getProductsByMainCategory = async (mainCategoryId) => {
             po.product_id,
             JSON_ARRAYAGG(
                 JSON_OBJECT(
+                    "product_option_id", po.id,
                     "size", po.size, 
                     "price", po.price
                 )
@@ -167,8 +170,9 @@ const getProductsByMainCategory = async (mainCategoryId) => {
     ) prod_g ON p.id=prod_g.product_id
     INNER JOIN product_formulations pfm ON p.product_formulation_id=pfm.id
     WHERE sub_cat.main_category_id=?
+    LIMIT ?;
     `,
-    [mainCategoryId]
+    [mainCategoryId, limit]
   );
 };
 
@@ -226,6 +230,7 @@ const getProductsBySubCategory = async (
             po.product_id,
             JSON_ARRAYAGG(
                 JSON_OBJECT(
+                    "product_option_id", po.id,
                     "size", po.size, 
                     "price", po.price
                 )
@@ -310,6 +315,7 @@ const getProductById = async (productId) => {
             po.product_id,
             JSON_ARRAYAGG(
                 JSON_OBJECT(
+                    "product_option_id", po.id,
                     "size", po.size, 
                     "price", po.price
                 )
