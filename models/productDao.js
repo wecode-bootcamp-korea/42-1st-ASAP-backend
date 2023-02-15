@@ -2,7 +2,14 @@ const mysqlDataSource = require('./dataSource');
 const QueryBuilder = require('./productListQuery');
 
 const getProducts = async (limit) => {
-  limit = Number(limit);
+  const queryBuilder = new QueryBuilder(
+    (mainCategoryId = undefined),
+    (subCategoryId = undefined),
+    (formulation = undefined),
+    (scent = undefined),
+    limit
+  );
+  const query = queryBuilder.buildQuery();
   return await mysqlDataSource.query(
     `
     SELECT
@@ -82,14 +89,21 @@ const getProducts = async (limit) => {
         GROUP BY product_id
     ) prod_g ON p.id=prod_g.product_id
     INNER JOIN product_formulations pfm ON p.product_formulation_id=pfm.id
-    LIMIT ?;
-    `,
-    [limit]
+    ${query};
+    `
   );
 };
 
 const getProductsByMainCategory = async (mainCategoryId, limit) => {
-  limit = Number(limit);
+  const queryBuilder = new QueryBuilder(
+    mainCategoryId,
+    (subCategoryId = undefined),
+    (formulation = undefined),
+    (scent = undefined),
+    limit
+  );
+  const query = queryBuilder.buildQuery();
+
   return await mysqlDataSource.query(
     `
     SELECT
@@ -169,10 +183,8 @@ const getProductsByMainCategory = async (mainCategoryId, limit) => {
         GROUP BY product_id
     ) prod_g ON p.id=prod_g.product_id
     INNER JOIN product_formulations pfm ON p.product_formulation_id=pfm.id
-    WHERE sub_cat.main_category_id=?
-    LIMIT ?;
-    `,
-    [mainCategoryId, limit]
+    ${query};
+    `
   );
 };
 
