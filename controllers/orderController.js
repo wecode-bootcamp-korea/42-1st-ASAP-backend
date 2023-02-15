@@ -1,6 +1,6 @@
 const orderService = require('../services/orderSerciveces');
 
-const delivers = async (req, res) => {
+const order = async (req, res) => {
   try {
     const {
       lastName,
@@ -12,7 +12,7 @@ const delivers = async (req, res) => {
       address,
       userId,
     } = req.body;
-    const result = await orderService.delivers(
+    const result = await orderService.order(
       lastName,
       firstName,
       message,
@@ -22,8 +22,7 @@ const delivers = async (req, res) => {
       address,
       userId
     );
-    console.log(result);
-    return res.status(200).json({ message: 'ㅇㅇㅇ' });
+    return res.status(200).json({ message: '오더 생성 완료' });
   } catch (err) {
     console.log(err);
     return res.status(err.statusCode || 400).json({ message: err.message });
@@ -31,17 +30,14 @@ const delivers = async (req, res) => {
 };
 
 const getUserinfo = async (req, res) => {
-  const {userId}  = req.params
-  console.log(userId);
+  const { userId } = req.params;
 
-  const result = await orderService.userInfo(
-    userId);
-
+  const result = await orderService.userInfo(userId);
 
   return res.status(200).json({ data: result });
 };
 
 module.exports = {
-  delivers,
-  getUserinfo
-}
+  order,
+  getUserinfo,
+};

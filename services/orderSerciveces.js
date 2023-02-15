@@ -1,6 +1,6 @@
 const orderDao = require('../models/orderDao');
 
-const delivers = async (
+const order = async (
   lastName,
   firstName,
   message,
@@ -21,7 +21,6 @@ const delivers = async (
       address,
       userId
     );
-    console.log(result);
     return result;
   } catch (err) {
     console.log('err', err);
@@ -29,13 +28,9 @@ const delivers = async (
   }
 };
 
-const userInfo = async (
-  id
-) => {
+const userInfo = async (id) => {
   try {
-    const result = await orderDao.getUserinfo(
-      id
-    );
+    const result = await orderDao.getUserinfo(id);
     return result;
   } catch (err) {
     console.log('err', err);
@@ -44,6 +39,6 @@ const userInfo = async (
 };
 
 module.exports = {
-  delivers,
-  userInfo
+  order,
+  userInfo,
 };

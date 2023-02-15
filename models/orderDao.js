@@ -1,4 +1,4 @@
-const mysqlDataSource = require("./dataSource");
+const mysqlDataSource = require('./dataSource');
 
 const totalProcess = async (
   lastName,
@@ -188,8 +188,6 @@ const totalProcess = async (
     await queryRunner.rollbackTransaction();
     await queryRunner.release();
 
-    console.log(err);
-
     throw new Error('FAILED TO CREATE ORDER');
   }
 };
@@ -204,12 +202,12 @@ const getUserinfo = async (userId) => {
     FROM users u
     WHERE u.id = ?;
     `,
-   [userId]
+    [userId]
   );
 
-  return user
+  return user;
 };
 module.exports = {
   totalProcess,
-  getUserinfo
+  getUserinfo,
 };

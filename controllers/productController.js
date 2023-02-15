@@ -44,5 +44,4 @@ module.exports = {
   getProductsByMainCategory,
   getProductsBySubCategory,
   getProductById,
-  
 };
