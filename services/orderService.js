@@ -42,6 +42,35 @@ const createOrderItem = async (orderId, userId) => {
   return await orderDao.createOrderItem(orderId, userId);
 };
 
+const delivers = async (
+  lastName,
+  firstName,
+  message,
+  countryCode,
+  phoneNumber,
+  country,
+  address,
+  userId
+) => {
+  try {
+    const result = await orderDao.totalProcess(
+      lastName,
+      firstName,
+      message,
+      countryCode,
+      phoneNumber,
+      country,
+      address,
+      userId
+    );
+    console.log(result);
+    return result;
+  } catch (err) {
+    console.log('err', err);
+    throw err;
+  }
+};
+
 module.exports = {
   createCart,
   updateCart,
@@ -49,4 +78,5 @@ module.exports = {
   createDelivery,
   createOrder,
   createOrderItem,
+  delivers,
 };
