@@ -2,13 +2,13 @@ const mysqlDataSource = require('./dataSource');
 const QueryBuilder = require('./productListQuery');
 
 const getProducts = async (limit) => {
-  const queryBuilder = new QueryBuilder(
-    (mainCategoryId = undefined),
-    (subCategoryId = undefined),
-    (formulation = undefined),
-    (scent = undefined),
-    limit
-  );
+  const queryBuilder = new QueryBuilder({
+    mainCategoryId: undefined,
+    subCategoryId: undefined,
+    formulation: undefined,
+    scent: undefined,
+    limit: limit,
+  });
   const query = queryBuilder.buildQuery();
   return await mysqlDataSource.query(
     `
@@ -95,13 +95,14 @@ const getProducts = async (limit) => {
 };
 
 const getProductsByMainCategory = async (mainCategoryId, limit) => {
-  const queryBuilder = new QueryBuilder(
-    mainCategoryId,
-    (subCategoryId = undefined),
-    (formulation = undefined),
-    (scent = undefined),
-    limit
-  );
+  const queryBuilder = new QueryBuilder({
+    mainCategoryId: mainCategoryId,
+    subCategoryId: undefined,
+    formulation: undefined,
+    scent: undefined,
+    limit: limit,
+  });
+
   const query = queryBuilder.buildQuery();
 
   return await mysqlDataSource.query(
@@ -195,7 +196,6 @@ const getProductsBySubCategory = async (
   scent,
   limit
 ) => {
-  // console.log(scent);
   const queryBuilder = new QueryBuilder(
     mainCategoryId,
     subCategoryId,
@@ -205,7 +205,6 @@ const getProductsBySubCategory = async (
   );
 
   const query = queryBuilder.buildQuery();
-  // console.log(query);
 
   return await mysqlDataSource.query(
     `
