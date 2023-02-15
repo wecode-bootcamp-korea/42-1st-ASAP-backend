@@ -6,14 +6,13 @@ CREATE TABLE deliveries (
     message VARCHAR(100) NULL,
     country_code INT NULL ,
     phone_number VARCHAR(20) NULL ,
-    country VARCHAR(30) NOT NULL,
+    country VARCHAR(30) NULL,
     adress VARCHAR(50) NOT NULL,
     user_id INT NOT NULL,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-	updated_at TIMESTAMP NULL ON UPDATE CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NULL ON UPDATE CURRENT_TIMESTAMP,
     CONSTRAINT delieveries_user_id_fkey FOREIGN KEY (user_id) REFERENCES users (id)
     );
 
 -- migrate:down
 DROP TABLE deliveries;
-
