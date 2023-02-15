@@ -38,9 +38,11 @@ const getProductById = async (req, res) => {
 
   return res.status(200).json({ data: result });
 };
+
 module.exports = {
   getProducts,
   getProductsByMainCategory,
   getProductsBySubCategory,
   getProductById,
+  
 };

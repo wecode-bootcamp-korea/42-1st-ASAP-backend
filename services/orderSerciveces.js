@@ -1,10 +1,6 @@
 const orderDao = require('../models/orderDao');
 
-const createCart = async (userId, productId, quantity) => {
-  return await orderDao.createCart(userId, productId, quantity);
-};
-
-const createDelivery = async (
+const delivers = async (
   lastName,
   firstName,
   message,
@@ -14,20 +10,40 @@ const createDelivery = async (
   address,
   userId
 ) => {
-  return await orderDao.createDelivery(
-    lastName,
-    firstName,
-    message,
-    countryCode,
-    phoneNumber,
-    country,
-    address,
-    userId
-  );
+  try {
+    const result = await orderDao.totalProcess(
+      lastName,
+      firstName,
+      message,
+      countryCode,
+      phoneNumber,
+      country,
+      address,
+      userId
+    );
+    console.log(result);
+    return result;
+  } catch (err) {
+    console.log('err', err);
+    throw err;
+  }
+};
+
+const userInfo = async (
+  id
+) => {
+  try {
+    const result = await orderDao.getUserinfo(
+      id
+    );
+    return result;
+  } catch (err) {
+    console.log('err', err);
+    throw err;
+  }
 };
 
 module.exports = {
-  createCart,
-  createDelivery,
+  delivers,
+  userInfo
 };
-

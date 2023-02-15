@@ -1,10 +1,13 @@
-const express = require('express');
-const router = express.Router();​
-const orderController = require('../controllers/orderController');
+const express = require("express");
 
-router.post('/carts', orderController.createCart);
-router.post('/deliveries', orderController.createDelivery);
+const orderController = require("../controllers/orderController");
 
-router.patch(결제??)
+const router = express.Router();
+
+router.post("/test", orderController.delivers);
+router.get("/:userId",orderController.getUserinfo);
 
 
+module.exports = {
+  router
+};
