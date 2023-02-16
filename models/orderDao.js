@@ -1,5 +1,41 @@
 const mysqlDataSource = require('./dataSource');
 
+const getCart = async (userId) => {
+  const result = await mysqlDataSource.query(
+    `
+    SELECT
+    po.id,
+    JSON_ARRAYAGG(JSON_OBJECT(
+    "size", po.size,
+    "price", po.price,
+    "name", prod.name,
+    "image_url", prod.image_url,
+    "quantity", cart.total_quantity,
+    "sub_price", cart.total_quantity * po.price)) AS info
+  FROM product_options po
+  INNER JOIN (
+    SELECT
+      p.id,
+      p.name,
+      p.image_url
+    FROM products p
+  ) prod ON prod.id=po.product_id
+  INNER JOIN (
+    SELECT
+      c.product_options_id,
+      c.user_id,
+      SUM(c.quantity) as total_quantity
+    FROM carts c
+    GROUP BY c.product_options_id, user_id
+  ) cart ON cart.product_options_id = po.id
+  WHERE user_id = ?
+  GROUP BY po.id;
+    `,
+    [userId]
+  );
+  return result;
+};
+
 const createCart = async (userId, productOptionId, quantity) => {
   await mysqlDataSource.query(
     `
@@ -372,4 +408,5 @@ module.exports = {
   createOrderItem,
   getTotalPrice,
   totalProcess,
+  getCart,
 };

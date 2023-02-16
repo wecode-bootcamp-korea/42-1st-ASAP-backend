@@ -6,7 +6,8 @@ const { validateToken } = require('../middlewares/auth');
 
 router.post('/deliver', orderController.delivers);
 router.patch('/carts', validateToken, orderController.updateCart);
-router.post('/carts', orderController.createCart);
+router.post('/carts', validateToken, orderController.createCart);
+router.get('/carts', validateToken, orderController.getCart);
 router.delete('/carts', validateToken, orderController.deleteCart);
 router.post('/deliveries', validateToken, orderController.createDelivery);
 router.post('/items/:orderId', validateToken, orderController.createOrderItem);

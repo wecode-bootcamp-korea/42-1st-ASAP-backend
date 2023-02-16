@@ -1,5 +1,16 @@
 const orderDao = require('../models/orderDao');
 
+const getCart = async (req, res) => {
+  try {
+    const userId = req.user;
+    result = await orderService.getCart(userId);
+
+    return res.status(201).json({ data: result });
+  } catch (error) {
+    return res.status(error.code).json({ message: error.message });
+  }
+};
+
 const createCart = async (userId, productOptionId, quantity) => {
   return await orderDao.createCart(userId, productOptionId, quantity);
 };
@@ -79,4 +90,5 @@ module.exports = {
   createOrder,
   createOrderItem,
   delivers,
+  getCart,
 };
