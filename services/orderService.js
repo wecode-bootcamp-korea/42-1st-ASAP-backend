@@ -21,6 +21,7 @@ const order = async (
       address,
       userId
     );
+    console.log(result);
     return result;
   } catch (err) {
     console.log('err', err);

@@ -188,6 +188,8 @@ const totalProcess = async (
     await queryRunner.rollbackTransaction();
     await queryRunner.release();
 
+    console.log(err);
+
     throw new Error('FAILED TO CREATE ORDER');
   }
 };

@@ -1,4 +1,4 @@
-const orderService = require('../services/orderSerciveces');
+const orderService = require('../services/orderService');
 
 const order = async (req, res) => {
   try {
@@ -22,10 +22,13 @@ const order = async (req, res) => {
       address,
       userId
     );
+    console.log(result);
     return res.status(200).json({ message: '오더 생성 완료' });
   } catch (err) {
     console.log(err);
-    return res.status(err.statusCode || 400).json({ message: err.message });
+    return res
+      .status(err.statusCode || 400)
+      .json({ message: 'Not enough Money', message: err.message });
   }
 };
 
