@@ -43,7 +43,23 @@ const getuserByEmail = async (email) => {
   return user;
 };
 
+const getUserinfo = async (userId) => {
+  const [user] = await AppDataSource.query(
+    `
+    SELECT 
+      u.email,
+      u.first_name,
+      u.last_name
+    FROM users u
+    WHERE u.id = ?;
+    `,
+    [userId]
+  );
+
+  return user;
+};
 module.exports = {
   createUser,
   getuserByEmail,
+  getUserinfo,
 };

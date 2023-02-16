@@ -32,15 +32,6 @@ const order = async (req, res) => {
   }
 };
 
-const getUserinfo = async (req, res) => {
-  const { userId } = req.params;
-
-  const result = await orderService.userInfo(userId);
-
-  return res.status(200).json({ data: result });
-};
-
 module.exports = {
   order,
-  getUserinfo,
 };

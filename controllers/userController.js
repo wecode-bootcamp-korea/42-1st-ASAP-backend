@@ -30,8 +30,16 @@ const signIn = async (req, res) => {
     return res.status(err.statusCode || 400).json({ message: err.message });
   }
 };
+const getUser = async (req, res) => {
+  const { userId } = req.params;
+
+  const result = await userService.userInfo(userId);
+
+  return res.status(200).json({ data: result });
+};
 
 module.exports = {
   signUp,
   signIn,
+  getUser,
 };

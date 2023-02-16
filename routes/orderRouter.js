@@ -5,7 +5,6 @@ const orderController = require('../controllers/orderController');
 const router = express.Router();
 
 router.post('/', orderController.order);
-router.get('/:userId', orderController.getUserinfo);
 
 module.exports = {
   router,

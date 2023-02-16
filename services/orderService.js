@@ -21,17 +21,7 @@ const order = async (
       address,
       userId
     );
-    console.log(result);
-    return result;
-  } catch (err) {
-    console.log('err', err);
-    throw err;
-  }
-};
 
-const userInfo = async (id) => {
-  try {
-    const result = await orderDao.getUserinfo(id);
     return result;
   } catch (err) {
     console.log('err', err);
@@ -41,5 +31,4 @@ const userInfo = async (id) => {
 
 module.exports = {
   order,
-  userInfo,
 };

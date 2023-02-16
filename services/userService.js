@@ -53,7 +53,18 @@ const signIn = async (email, password) => {
   return jwt.sign(payLoad, SECRET_KEY);
 };
 
+const userInfo = async (id) => {
+  try {
+    const result = await userDao.getUserinfo(id);
+    return result;
+  } catch (err) {
+    console.log('err', err);
+    throw err;
+  }
+};
+
 module.exports = {
   signUp,
   signIn,
+  userInfo,
 };
