@@ -1,8 +1,8 @@
-const userDao = require('../models/userDao');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+
+const userDao = require('../models/userDao');
 const validate = require('../utils/validators');
-const SecretKey = process.env.SECRET_KEY;
 
 const signUp = async (email, password, firstname, lastname, skintype) => {
   await validate.validateEmail(email);
@@ -32,9 +32,6 @@ const signIn = async (email, password) => {
   await validate.validatePassword(password);
 
   const user = await userDao.getuserByEmail(email);
-  const payLoad = { userId: user.id };
-  const hashedPassword = user.password;
-  const checkHash = await bcrypt.compare(password, hashedPassword.toString());
 
   if (!user) {
     const err = new Error('user does not exist');
@@ -42,13 +39,18 @@ const signIn = async (email, password) => {
     throw err;
   }
 
+  const payLoad = { userId: user.id };
+  const hashedPassword = user.password;
+  const checkHash = await bcrypt.compare(password, hashedPassword.toString());
+
   if (!checkHash) {
     const err = new Error('invalid password');
     err.statusCode = 401;
     throw err;
   }
 
-  return jwt.sign(payLoad, SecretKey);
+  const SECRET_KEY = process.env.SECRET_KEY;
+  return jwt.sign(payLoad, SECRET_KEY);
 };
 
 module.exports = {
