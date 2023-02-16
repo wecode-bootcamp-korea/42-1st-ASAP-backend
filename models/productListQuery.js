@@ -1,5 +1,5 @@
 class QueryBuilder {
-  constructor(mainCategoryId, subCategoryId, formulation, scent, limit) {
+  constructor({ mainCategoryId, subCategoryId, formulation, scent, limit }) {
     this.limit = limit || 10;
 
     this.whereParams = {
