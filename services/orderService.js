@@ -1,6 +1,6 @@
 const orderDao = require('../models/orderDao');
 
-const order = async (
+const createOrder = async (
   lastName,
   firstName,
   message,
@@ -10,7 +10,7 @@ const order = async (
   address,
   userId
 ) => {
-  const result = await orderDao.totalProcess(
+  const result = await orderDao.createOrder(
     lastName,
     firstName,
     message,
@@ -25,5 +25,5 @@ const order = async (
 };
 
 module.exports = {
-  order,
+  createOrder,
 };

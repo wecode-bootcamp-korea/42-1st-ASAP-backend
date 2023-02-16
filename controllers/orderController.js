@@ -1,6 +1,7 @@
 const orderService = require('../services/orderService');
+const { catchAsync } = require('../utils/error');
 
-const order = catchAsync(async (req, res) => {
+const createOrder = catchAsync(async (req, res) => {
   const {
     lastName,
     firstName,
@@ -9,9 +10,11 @@ const order = catchAsync(async (req, res) => {
     phoneNumber,
     country,
     address,
-    userId,
   } = req.body;
-  const result = await orderService.order(
+
+  const userId = req.user;
+
+  await orderService.createOrder(
     lastName,
     firstName,
     message,
@@ -25,5 +28,5 @@ const order = catchAsync(async (req, res) => {
 });
 
 module.exports = {
-  order,
+  createOrder,
 };

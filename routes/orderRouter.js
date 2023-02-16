@@ -4,7 +4,7 @@ const orderController = require('../controllers/orderController');
 
 const router = express.Router();
 
-router.post('/', orderController.order);
+router.post('/', orderController.createOrder);
 
 module.exports = {
   router,

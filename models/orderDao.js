@@ -1,6 +1,6 @@
 const mysqlDataSource = require('./dataSource');
 
-const totalProcess = async (
+const createOrder = async (
   lastName,
   firstName,
   message,
@@ -192,5 +192,5 @@ const totalProcess = async (
 };
 
 module.exports = {
-  totalProcess,
+  createOrder,
 };

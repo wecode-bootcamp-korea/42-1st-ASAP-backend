@@ -14,7 +14,7 @@ const signUp = catchAsync(async (req, res) => {
 });
 
 const getUser = catchAsync(async (req, res) => {
-  const { userId } = req.user;
+  const userId = req.user;
 
   const result = await userService.userInfo(userId);
 
