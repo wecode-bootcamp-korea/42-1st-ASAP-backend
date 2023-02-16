@@ -1,7 +1,7 @@
 const orderService = require('../services/orderService');
 const { catchAsync } = require('../utils/error');
 
-const createDelivery = catchAsync(async (req, res) => {
+const orderProcess = catchAsync(async (req, res) => {
   const {
     lastName,
     firstName,
@@ -13,7 +13,7 @@ const createDelivery = catchAsync(async (req, res) => {
   } = req.body;
   const userId = req.user;
 
-  await orderService.createDelivery(
+  await orderService.orderProcess(
     lastName,
     firstName,
     message,
@@ -24,55 +24,9 @@ const createDelivery = catchAsync(async (req, res) => {
     userId
   );
 
-  return res.status(201).json({ message: 'deliveryCreated' });
+  return res.status(200).json({ message: '결제가 완료되었습니다.' });
 });
-
-const createOrder = catchAsync(async (req, res) => {
-  const { deliveryId } = req.params;
-  const userId = req.user;
-
-  await orderService.createOrder(userId, deliveryId);
-
-  return res.status(201).json({ message: 'orderCreated' });
-});
-
-const createOrderItem = catchAsync(async (req, res) => {
-  const { orderId } = req.params;
-  const userId = req.user;
-
-  await orderService.createOrderItem(orderId, userId);
-
-  return res.status(201).json({ message: 'orderItemCreated' });
-});
-
-const delivers = async (req, res) => {
-  const {
-    lastName,
-    firstName,
-    message,
-    countryCode,
-    phoneNumber,
-    country,
-    address,
-    userId,
-  } = req.body;
-  const result = await orderService.delivers(
-    lastName,
-    firstName,
-    message,
-    countryCode,
-    phoneNumber,
-    country,
-    address,
-    userId
-  );
-  console.log(result);
-  return res.status(200).json({ message: 'ㅇㅇㅇ' });
-};
 
 module.exports = {
-  createDelivery,
-  createOrder,
-  createOrderItem,
-  delivers,
+  orderProcess,
 };
