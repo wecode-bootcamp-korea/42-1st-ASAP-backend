@@ -14,6 +14,5 @@ CREATE TABLE deliveries (
     CONSTRAINT delieveries_user_id_fkey FOREIGN KEY (user_id) REFERENCES users (id)
     );
 
-
 -- migrate:down
 DROP TABLE deliveries;
