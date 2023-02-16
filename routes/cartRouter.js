@@ -1,13 +1,13 @@
 const express = require('express');
 const router = express.Router();
 
-const cartController = require('../controllers/orderController');
+const cartController = require('../controllers/cartController');
 const { validateToken } = require('../middlewares/auth');
 
-router.patch('/carts', validateToken, cartController.updateCart);
-router.post('/carts', validateToken, cartController.createCart);
-router.delete('/carts', validateToken, cartController.deleteCart);
-router.get('/carts', validateToken, cartController.getCart);
+router.patch('/', validateToken, cartController.updateCart);
+router.post('/', validateToken, cartController.createCart);
+router.delete('/', validateToken, cartController.deleteCart);
+router.get('/', validateToken, cartController.getCart);
 
 module.exports = {
   router,

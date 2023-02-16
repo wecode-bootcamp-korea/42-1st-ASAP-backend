@@ -1,7 +1,6 @@
-const cartService = require('../services/orderService');
-const { catchAsync } = require('../utils/error');
+const cartService = require('../services/cartService');
 
-const createCart = catchAsync(async (req, res) => {
+const createCart = async (req, res) => {
   try {
     const { productOptionId, quantity } = req.body;
     const userId = req.user;
@@ -12,9 +11,9 @@ const createCart = catchAsync(async (req, res) => {
   } catch (error) {
     return res.status(error.code).json({ message: error.message });
   }
-});
+};
 
-const updateCart = catchAsync(async (req, res) => {
+const updateCart = async (req, res) => {
   try {
     const { productOptionId, quantity } = req.body;
     const userId = req.user;
@@ -25,9 +24,9 @@ const updateCart = catchAsync(async (req, res) => {
   } catch (error) {
     return res.status(error.code).json({ message: error.message });
   }
-});
+};
 
-const deleteCart = catchAsync(async (req, res) => {
+const deleteCart = async (req, res) => {
   try {
     const { productOptionId } = req.body;
     const userId = req.user;
@@ -38,9 +37,9 @@ const deleteCart = catchAsync(async (req, res) => {
   } catch (error) {
     return res.status(error.code).json({ message: error.message });
   }
-});
+};
 
-const getCart = catchAsync(async (req, res) => {
+const getCart = async (req, res) => {
   try {
     const userId = req.user;
     result = await cartService.getCart(userId);
@@ -49,7 +48,7 @@ const getCart = catchAsync(async (req, res) => {
   } catch (error) {
     return res.status(error.code).json({ message: error.message });
   }
-});
+};
 
 module.exports = {
   createCart,
