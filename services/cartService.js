@@ -16,9 +16,14 @@ const getCart = async (userId) => {
   return await cartDao.getCart(userId);
 };
 
+const getTotalPrice = async (userId) => {
+  return await cartDao.getTotalPrice(userId);
+};
+
 module.exports = {
   createCart,
   updateCart,
   deleteCart,
   getCart,
+  getTotalPrice,
 };

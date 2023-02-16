@@ -76,9 +76,31 @@ const getCart = async (userId) => {
   return result;
 };
 
+const getTotalPrice = async (userId) => {
+  const result = await mysqlDataSource.query(
+    `
+    SELECT
+      c.user_id,
+      SUM(c.quantity * cart.price) AS total_price
+    FROM carts c
+    INNER JOIN (
+      SELECT
+        po.id,
+        po.price
+      FROM product_options po
+    ) cart ON cart.id=c.product_options_id
+    WHERE c.user_id=?
+    GROUP BY c.user_id;
+    `,
+    [userId]
+  );
+  return result;
+};
+
 module.exports = {
   createCart,
   updateCart,
   deleteCart,
   getCart,
+  getTotalPrice,
 };

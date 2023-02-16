@@ -35,9 +35,17 @@ const getCart = catchAsync(async (req, res) => {
   return res.status(200).json({ data: result });
 });
 
+const getTotalPrice = catchAsync(async (req, res) => {
+  const userId = req.user;
+  const result = await cartService.getTotalPrice(userId);
+
+  return res.status(200).json({ data: result });
+});
+
 module.exports = {
   createCart,
   updateCart,
   deleteCart,
   getCart,
+  getTotalPrice,
 };
