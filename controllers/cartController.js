@@ -42,7 +42,7 @@ const deleteCart = async (req, res) => {
 const getCart = async (req, res) => {
   try {
     const userId = req.user;
-    result = await cartService.getCart(userId);
+    const result = await cartService.getCart(userId);
 
     return res.status(201).json({ data: result });
   } catch (error) {
