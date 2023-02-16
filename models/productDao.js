@@ -2,7 +2,15 @@ const mysqlDataSource = require('./dataSource');
 const QueryBuilder = require('./productListQuery');
 
 const getProducts = async (limit) => {
-  limit = Number(limit);
+  const queryBuilder = new QueryBuilder({
+    mainCategoryId: undefined,
+    subCategoryId: undefined,
+    formulation: undefined,
+    scent: undefined,
+    limit: limit,
+  });
+
+  const query = queryBuilder.buildQuery();
   return await mysqlDataSource.query(
     `
     SELECT
@@ -41,6 +49,7 @@ const getProducts = async (limit) => {
             po.product_id,
             JSON_ARRAYAGG(
                 JSON_OBJECT(
+                    "product_option_id", po.id,
                     "size", po.size, 
                     "price", po.price
                 )
@@ -81,13 +90,22 @@ const getProducts = async (limit) => {
         GROUP BY product_id
     ) prod_g ON p.id=prod_g.product_id
     INNER JOIN product_formulations pfm ON p.product_formulation_id=pfm.id
-    LIMIT ?;
-    `,
-    [limit]
+    ${query};
+    `
   );
 };
 
-const getProductsByMainCategory = async (mainCategoryId) => {
+const getProductsByMainCategory = async (mainCategoryId, limit) => {
+  const queryBuilder = new QueryBuilder({
+    mainCategoryId: mainCategoryId,
+    subCategoryId: undefined,
+    formulation: undefined,
+    scent: undefined,
+    limit: limit,
+  });
+
+  const query = queryBuilder.buildQuery();
+
   return await mysqlDataSource.query(
     `
     SELECT
@@ -126,6 +144,7 @@ const getProductsByMainCategory = async (mainCategoryId) => {
             po.product_id,
             JSON_ARRAYAGG(
                 JSON_OBJECT(
+                    "product_option_id", po.id,
                     "size", po.size, 
                     "price", po.price
                 )
@@ -166,9 +185,8 @@ const getProductsByMainCategory = async (mainCategoryId) => {
         GROUP BY product_id
     ) prod_g ON p.id=prod_g.product_id
     INNER JOIN product_formulations pfm ON p.product_formulation_id=pfm.id
-    WHERE sub_cat.main_category_id=?
-    `,
-    [mainCategoryId]
+    ${query};
+    `
   );
 };
 
@@ -179,13 +197,14 @@ const getProductsBySubCategory = async (
   scent,
   limit
 ) => {
-  const queryBuilder = new QueryBuilder(
-    mainCategoryId,
-    subCategoryId,
-    formulation,
-    scent,
-    limit
-  );
+  const queryBuilder = new QueryBuilder({
+    mainCategoryId: mainCategoryId,
+    subCategoryId: subCategoryId,
+    formulation: formulation,
+    scent: scent,
+    limit: limit,
+  });
+
   const query = queryBuilder.buildQuery();
 
   return await mysqlDataSource.query(
@@ -226,6 +245,7 @@ const getProductsBySubCategory = async (
             po.product_id,
             JSON_ARRAYAGG(
                 JSON_OBJECT(
+                    "product_option_id", po.id,
                     "size", po.size, 
                     "price", po.price
                 )
@@ -310,6 +330,7 @@ const getProductById = async (productId) => {
             po.product_id,
             JSON_ARRAYAGG(
                 JSON_OBJECT(
+                    "product_option_id", po.id,
                     "size", po.size, 
                     "price", po.price
                 )

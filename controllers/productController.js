@@ -10,8 +10,12 @@ const getProducts = async (req, res) => {
 
 const getProductsByMainCategory = async (req, res) => {
   const { mainCategoryId } = req.params;
+  const { limit } = req.query;
 
-  const result = await productService.getProductsByMainCategory(mainCategoryId);
+  const result = await productService.getProductsByMainCategory(
+    mainCategoryId,
+    limit
+  );
 
   return res.status(200).json({ data: result });
 };
@@ -38,7 +42,6 @@ const getProductById = async (req, res) => {
 
   return res.status(200).json({ data: result });
 };
-
 module.exports = {
   getProducts,
   getProductsByMainCategory,
