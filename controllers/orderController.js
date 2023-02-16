@@ -2,89 +2,72 @@ const orderService = require('../services/orderService');
 const { catchAsync } = require('../utils/error');
 
 const createDelivery = catchAsync(async (req, res) => {
-  try {
-    const {
-      lastName,
-      firstName,
-      message,
-      countryCode,
-      phoneNumber,
-      country,
-      address,
-    } = req.body;
-    const userId = req.user;
+  const {
+    lastName,
+    firstName,
+    message,
+    countryCode,
+    phoneNumber,
+    country,
+    address,
+  } = req.body;
+  const userId = req.user;
 
-    await orderService.createDelivery(
-      lastName,
-      firstName,
-      message,
-      countryCode,
-      phoneNumber,
-      country,
-      address,
-      userId
-    );
+  await orderService.createDelivery(
+    lastName,
+    firstName,
+    message,
+    countryCode,
+    phoneNumber,
+    country,
+    address,
+    userId
+  );
 
-    return res.status(201).json({ message: 'deliveryCreated' });
-  } catch (error) {
-    return res.status(error.code).json({ message: error.message });
-  }
+  return res.status(201).json({ message: 'deliveryCreated' });
 });
 
 const createOrder = catchAsync(async (req, res) => {
-  try {
-    const { deliveryId } = req.params;
-    const userId = req.user;
+  const { deliveryId } = req.params;
+  const userId = req.user;
 
-    await orderService.createOrder(userId, deliveryId);
+  await orderService.createOrder(userId, deliveryId);
 
-    return res.status(201).json({ message: 'orderCreated' });
-  } catch (error) {
-    return res.status(error.code).json({ message: error.message });
-  }
+  return res.status(201).json({ message: 'orderCreated' });
 });
 
 const createOrderItem = catchAsync(async (req, res) => {
-  try {
-    const { orderId } = req.params;
-    const userId = req.user;
+  const { orderId } = req.params;
+  const userId = req.user;
 
-    await orderService.createOrderItem(orderId, userId);
+  await orderService.createOrderItem(orderId, userId);
 
-    return res.status(201).json({ message: 'orderItemCreated' });
-  } catch (error) {
-    return res.status(error.code).json({ message: error.message });
-  }
+  return res.status(201).json({ message: 'orderItemCreated' });
 });
 
 const delivers = async (req, res) => {
-  try {
-    const {
-      lastName,
-      firstName,
-      message,
-      countryCode,
-      phoneNumber,
-      country,
-      address,
-      userId,
-    } = req.body;
-    const result = await orderService.delivers(
-      lastName,
-      firstName,
-      message,
-      countryCode,
-      phoneNumber,
-      country,
-      address,
-      userId
-    );
-    console.log(result);
-    return res.status(200).json({ message: 'ㅇㅇㅇ' });
-  } catch (err) {
-    console.log(err);
-    return res.status(err.statusCode || 400).json({ message: err.message });
-  }
+  const {
+    lastName,
+    firstName,
+    message,
+    countryCode,
+    phoneNumber,
+    country,
+    address,
+    userId,
+  } = req.body;
+  const result = await orderService.delivers(
+    lastName,
+    firstName,
+    message,
+    countryCode,
+    phoneNumber,
+    country,
+    address,
+    userId
+  );
+  console.log(result);
+  return res.status(200).json({ message: 'ㅇㅇㅇ' });
 };
 
 module.exports = {
