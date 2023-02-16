@@ -1,5 +1,5 @@
 class QueryBuilder {
-  constructor(mainCategoryId, subCategoryId, formulation, scent, limit) {
+  constructor({ mainCategoryId, subCategoryId, formulation, scent, limit }) {
     this.limit = limit || 10;
 
     this.whereParams = {
@@ -46,7 +46,14 @@ class QueryBuilder {
   }
 
   scentFilterBuilder(scent) {
-    return `prod_s.scents like "%${scent}%"`;
+    const scents = [];
+    let scentClause = '';
+    for (let incense in scent) {
+      scentClause = `prod_s.scents like "%` + `${scent[incense]}` + `%"`;
+      scents.push(scentClause);
+    }
+    const fullScentClause = scents.join(' AND ');
+    return `${fullScentClause}`;
   }
 
   buildQuery() {
