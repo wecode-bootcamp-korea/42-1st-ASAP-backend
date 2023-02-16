@@ -28,15 +28,10 @@ const signUp = async (email, password, firstname, lastname, skintype) => {
 };
 
 const signIn = async (email, password) => {
-  const SECRET_KEY = process.env.SECRET_KEY;
-
   await validate.validateEmail(email);
   await validate.validatePassword(password);
 
   const user = await userDao.getuserByEmail(email);
-  const payLoad = { userId: user.id };
-  const hashedPassword = user.password;
-  const checkHash = await bcrypt.compare(password, hashedPassword.toString());
 
   if (!user) {
     const err = new Error('user does not exist');
@@ -44,16 +39,27 @@ const signIn = async (email, password) => {
     throw err;
   }
 
+  const payLoad = { userId: user.id };
+  const hashedPassword = user.password;
+  const checkHash = await bcrypt.compare(password, hashedPassword.toString());
+
   if (!checkHash) {
     const err = new Error('invalid password');
     err.statusCode = 401;
     throw err;
   }
 
+  const SECRET_KEY = process.env.SECRET_KEY;
   return jwt.sign(payLoad, SECRET_KEY);
+};
+
+const userInfo = async (id) => {
+  const result = await userDao.getUserinfo(id);
+  return result;
 };
 
 module.exports = {
   signUp,
   signIn,
+  userInfo,
 };

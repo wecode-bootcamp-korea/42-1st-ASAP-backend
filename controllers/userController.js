@@ -10,7 +10,15 @@ const signUp = catchAsync(async (req, res) => {
 
   await userService.signUp(email, password, firstname, lastname, skintype);
 
-  return res.status(201).send({ message: 'SIGNUP_SUCCESS' });
+  return res.status(200).json({ message: 'SIGNUP_SUCCESS' });
+});
+
+const getUser = catchAsync(async (req, res) => {
+  const userId = req.user;
+
+  const result = await userService.userInfo(userId);
+
+  return res.status(200).json({ data: result });
 });
 
 const signIn = catchAsync(async (req, res) => {
@@ -19,12 +27,13 @@ const signIn = catchAsync(async (req, res) => {
   if (!email || !password) {
     throw new Error('KEY Error!');
   }
-  const result = await userService.signIn(email, password);
+  const token = await userService.signIn(email, password);
 
-  return res.status(200).json({ accessToken: result });
+  return res.status(200).json({ accessToken: token });
 });
 
 module.exports = {
   signUp,
   signIn,
+  getUser,
 };
