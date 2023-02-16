@@ -10,23 +10,18 @@ const order = async (
   address,
   userId
 ) => {
-  try {
-    const result = await orderDao.totalProcess(
-      lastName,
-      firstName,
-      message,
-      countryCode,
-      phoneNumber,
-      country,
-      address,
-      userId
-    );
+  const result = await orderDao.totalProcess(
+    lastName,
+    firstName,
+    message,
+    countryCode,
+    phoneNumber,
+    country,
+    address,
+    userId
+  );
 
-    return result;
-  } catch (err) {
-    console.log('err', err);
-    throw err;
-  }
+  return result;
 };
 
 module.exports = {

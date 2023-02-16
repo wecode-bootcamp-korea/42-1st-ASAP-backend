@@ -54,13 +54,8 @@ const signIn = async (email, password) => {
 };
 
 const userInfo = async (id) => {
-  try {
-    const result = await userDao.getUserinfo(id);
-    return result;
-  } catch (err) {
-    console.log('err', err);
-    throw err;
-  }
+  const result = await userDao.getUserinfo(id);
+  return result;
 };
 
 module.exports = {

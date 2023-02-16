@@ -158,7 +158,6 @@ const totalProcess = async (
     );
     const userPoint = user.point;
     const updatedPoint = userPoint - productPrice;
-    console.log(updatedPoint < 0);
 
     if (updatedPoint < 0) {
       throw new Error('포인트 부족');
@@ -187,8 +186,6 @@ const totalProcess = async (
   } catch (err) {
     await queryRunner.rollbackTransaction();
     await queryRunner.release();
-
-    console.log(err);
 
     throw new Error('FAILED TO CREATE ORDER');
   }
