@@ -1,14 +1,7 @@
 const orderDao = require('../models/orderDao');
 
-const getCart = async (req, res) => {
-  try {
-    const userId = req.user;
-    result = await orderService.getCart(userId);
-
-    return res.status(201).json({ data: result });
-  } catch (error) {
-    return res.status(error.code).json({ message: error.message });
-  }
+const getCart = async (userId) => {
+  return await orderDao.getCart(userId);
 };
 
 const createCart = async (userId, productOptionId, quantity) => {
