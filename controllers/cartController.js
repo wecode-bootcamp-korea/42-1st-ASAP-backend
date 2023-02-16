@@ -20,7 +20,7 @@ const updateCart = async (req, res) => {
 
     await cartService.updateCart(userId, productOptionId, quantity);
 
-    return res.status(201).json({ message: 'cartUpdated' });
+    return res.status(200).json({ message: 'cartUpdated' });
   } catch (error) {
     return res.status(error.code).json({ message: error.message });
   }
@@ -33,7 +33,7 @@ const deleteCart = async (req, res) => {
 
     await cartService.deleteCart(userId, productOptionId);
 
-    return res.status(201).json({ message: 'cartDeleted' });
+    return res.status(200).json({ message: 'cartDeleted' });
   } catch (error) {
     return res.status(error.code).json({ message: error.message });
   }
@@ -44,7 +44,7 @@ const getCart = async (req, res) => {
     const userId = req.user;
     const result = await cartService.getCart(userId);
 
-    return res.status(201).json({ data: result });
+    return res.status(200).json({ data: result });
   } catch (error) {
     return res.status(error.code).json({ message: error.message });
   }
