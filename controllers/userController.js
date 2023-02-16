@@ -19,9 +19,9 @@ const signIn = catchAsync(async (req, res) => {
   if (!email || !password) {
     throw new Error('KEY Error!');
   }
-  await userService.signIn(email, password);
+  const result = await userService.signIn(email, password);
 
-  return res.status(200).json('SIGNIN SUCCESS!');
+  return res.status(200).json({ accessToken: result });
 });
 
 module.exports = {
