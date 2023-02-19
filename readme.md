@@ -1,6 +1,7 @@
 ## 42-1st-ASAP-backend
 
-![img]('./../image/ERD-42-1st-ASAP-backend.png')
+![asaplogo_w](https://user-images.githubusercontent.com/115794886/219932537-9593571b-aa9d-41d3-b9ff-68cf613358fc.png)
+
 
 ## ASAP 1차 프로젝트 Back-end 소개
 
@@ -76,8 +77,9 @@
 [API Documentation](https://documenter.getpostman.com/view/25414601/2s935uGLTH)
 
 ## ERD
+![ERD-42-1st-ASAP-backend](https://user-images.githubusercontent.com/115794886/219932545-69d50463-e938-4574-ad09-47850a49c8e6.png)
 
-![img]('./../image/ERD-42-1st-ASAP-backend.png')
+
 <br>
 
 ## Reference
