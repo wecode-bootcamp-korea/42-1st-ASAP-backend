@@ -10,7 +10,7 @@ const signUp = catchAsync(async (req, res) => {
 
   await userService.signUp(email, password, firstname, lastname, skintype);
 
-  return res.status(200).json({ message: 'SIGNUP_SUCCESS' });
+  return res.status(201).json({ message: 'SIGNUP_SUCCESS' });
 });
 
 const getUser = catchAsync(async (req, res) => {

@@ -12,7 +12,7 @@ const signUp = async (email, password, firstname, lastname, skintype) => {
 
   if (user) {
     const err = new Error('duplicated email');
-    err.statusCode = 400;
+    err.statusCode = 409;
     throw err;
   }
 
