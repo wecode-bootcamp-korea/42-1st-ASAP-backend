@@ -19,34 +19,40 @@ describe('Sign Up', () => {
   });
 
   test('SUCCESS: created user', async () => {
-    const response = await request(app).post('/users/signup').send({
-      email: 'rightemail@email.com',
-      password: 'Password001@',
-      firstname: '스트',
-      lastname: '테',
-    });
-    expect(response, 200);
+    await request(app)
+      .post('/users/signup')
+      .send({
+        email: 'rightemail@email.com',
+        password: 'Password001@',
+        firstname: '스트',
+        lastname: '테',
+      })
+      .expect(201);
   });
 
   test('FAILED: INVALID EMAIL', async () => {
-    await request(app).post('/users/signup').send({
-      email: 'wrongEmail',
-      password: 'Password001@',
-      firstname: '스트',
-      lastname: '테',
-    });
-    //   .expect(400)
-    //   .expect({ message: 'invaild email!!' });
+    await request(app)
+      .post('/users/signup')
+      .send({
+        email: 'wrongEmail',
+        password: 'Password001@',
+        firstname: '스트',
+        lastname: '테',
+      })
+      .expect(400)
+      .expect({ message: 'invalid email' });
   });
 
   test('FAILED: duplicated email', async () => {
-    await request(app).post('/users/signup').send({
-      email: 'rightemail@email.com',
-      password: 'Password001@',
-      firstname: '스트',
-      lastname: '테',
-    });
-    //   .expect(409)
-    //   .expect({ message: 'duplicated email' });
+    await request(app)
+      .post('/users/signup')
+      .send({
+        email: 'rightemail@email.com',
+        password: 'Password001@',
+        firstname: '스트',
+        lastname: '테',
+      })
+      .expect(409)
+      .expect({ message: 'duplicated email' });
   });
 });
