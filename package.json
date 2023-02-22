@@ -2,10 +2,10 @@
   "name": "42-1st-asap-backend",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "server.js",
   "scripts": {
-    "start": "nodemon app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon server.js",
+    "test": "DOTENV_CONFIG_PATH=.env.test jest --setupFiles=dotenv/config"
   },
   "repository": {
     "type": "git",
@@ -27,5 +27,9 @@
     "morgan": "^1.10.0",
     "mysql2": "^3.1.2",
     "typeorm": "^0.3.12"
+  },
+  "devDependencies": {
+    "jest": "^29.4.3",
+    "supertest": "^6.3.3"
   }
 }
